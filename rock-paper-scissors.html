@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock paper scissors</title>
+  </head>
+  <body>
+    <h1>Welcome to rock paper scissors</h1>
+
+    <p>Rock &nbsp; paper &nbsp; scissor</p>
+    <button onclick="playGame('rock')">Rock</button>
+    <button onclick="playGame('paper')">Paper</button>
+    <button onclick="playGame('scissor')">Scissor</button>
+
+    <script>
+      const score = {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+      };
+
+      let name = JSON.parse(localStorage.getItem("user")) || "Jaswanth";
+      console.log(name);
+      function playGame(userMove) {
+        localStorage.setItem("user", JSON.stringify("Lanka Jaswanth"));
+        console.log(name);
+        let computerMove = "";
+        let randomNumber = Math.random();
+        if (randomNumber > 0 && randomNumber < 1 / 3) {
+          computerMove = "rock";
+        } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+          computerMove = "paper";
+        } else {
+          computerMove = "scissor";
+        }
+
+        if (computerMove === userMove) {
+          score.ties += 1;
+          console.log(score);
+          console.log(
+            `You selected:${userMove}, Computer Selected ${computerMove} wins:${score.wins}, Losses:${score.losses}, ties:${score.ties}`,
+          );
+        } else if (
+          (userMove == "rock" && computerMove == "scissor") ||
+          (userMove == "paper" && computerMove == "rock") ||
+          (userMove == "scissor" && computerMove == "paper")
+        ) {
+          score.wins += 1;
+          console.log(score);
+          console.log(
+            `You selectd: ${userMove}. computer selected: ${computerMove}. You Won, wins:${score.wins}, Losses:${score.losses}, ties:${score.ties}`,
+          );
+        } else if (
+          (computerMove == "paper" && userMove == "rock") ||
+          (computerMove == "rock" && userMove == "scissor") ||
+          (computerMove == "scissor" && userMove == "paper")
+        ) {
+          score.losses += 1;
+          console.log(score);
+          console.log(
+            `You selectd: ${userMove}. computer selected: ${computerMove}.You lose. wins:${score.wins}, Losses:${score.losses}, ties:${score.ties}`,
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

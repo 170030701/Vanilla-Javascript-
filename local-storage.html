@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="updateCounter()">click me to update</button>
+    <div>
+      <button onclick="switchMode()">Toggle Mode</button>
+    </div>
+    <script>
+      let count = parseInt(localStorage.getItem("counter")) || 0;
+      let obj1 = {
+        name: "Jaswanth",
+      };
+      let obj2 = { name: "Jaswanth" };
+      if (obj1 == obj2) {
+        console.log(true);
+      }
+
+      console.log(obj1);
+      console.log(obj2);
+      function updateCounter() {
+        count += 1;
+        localStorage.setItem("counter", JSON.stringify(count));
+        console.log(parseInt(localStorage.getItem("counter")));
+      }
+
+      let isDarkMode = JSON.parse(localStorage.getItem("darkMode")) || false;
+      function switchMode() {
+        if (isDarkMode) {
+          isDarkMode = false;
+        } else {
+          isDarkMode = true;
+        }
+        localStorage.setItem("darkMode", JSON.stringify(isDarkMode));
+        console.log(JSON.parse(localStorage.getItem("darkMode")));
+      }
+    </script>
+  </body>
+</html>
